@@ -1,155 +1,163 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 
-  <title>Receitinha do Dia</title>
-  <meta name="description" content="Receitinha do Dia" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Receitinha do Dia</title>
 
-  <style>
-    :root { color-scheme: light dark; }
+<meta name="theme-color" content="#000000"/>
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      background: #000;
-      overflow: hidden;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
+:root { color-scheme: light dark; }
 
-    /* Loader */
-    .loading {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #000;
-      color: #fff;
-      gap: 12px;
-      z-index: 10;
-    }
-    .dot {
-      width: 10px; height: 10px;
-      border-radius: 999px;
-      background: #fff;
-      opacity: .75;
-      animation: bounce 1s infinite ease-in-out;
-    }
-    .dot:nth-child(2){ animation-delay: .15s; opacity:.55; }
-    .dot:nth-child(3){ animation-delay: .30s; opacity:.35; }
+*{box-sizing:border-box;margin:0;padding:0;}
 
-    @keyframes bounce {
-      0%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-8px); }
-    }
+html,body{
+width:100%;
+height:100%;
+background:#000;
+overflow:hidden;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+}
 
-    iframe {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      background: #000;
-      display: block;
-    }
+/* LOADER */
 
-    /* Fallback (se iframe bloquear) */
-    .fallback {
-      position: fixed;
-      inset: 0;
-      display: none;
-      padding: 24px;
-      background: #000;
-      color: #fff;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      z-index: 20;
-    }
-    .fallback .box {
-      max-width: 520px;
-      width: 100%;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 14px;
-      padding: 18px;
-      background: rgba(255,255,255,.06);
-    }
-    .fallback a{
-      display: inline-block;
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: #22c55e;
-      color: #08120a;
-      font-weight: 800;
-      text-decoration: none;
-    }
-    .small { opacity: .8; font-size: 12px; margin-top: 10px; }
-  </style>
+.loading{
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#000;
+color:#fff;
+gap:12px;
+z-index:10;
+}
+
+.dot{
+width:10px;height:10px;border-radius:999px;
+background:#fff;
+animation:bounce 1s infinite ease-in-out;
+}
+
+@keyframes bounce{
+0%,80%,100%{transform:translateY(0);}
+40%{transform:translateY(-8px);}
+}
+
+/* IFRAME */
+
+iframe{
+position:fixed;
+inset:0;
+width:100%;
+height:100%;
+border:0;
+}
+
+/* BOTÃO (O MAIS IMPORTANTE) */
+
+.cta{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+max-width:480px;
+z-index:999;
+}
+
+.cta a{
+display:block;
+background:#22c55e;
+color:#fff;
+font-weight:800;
+font-size:20px;
+text-align:center;
+padding:18px;
+border-radius:14px;
+text-decoration:none;
+box-shadow:0 15px 40px rgba(0,0,0,.6);
+animation:pulse 1.6s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.06);}
+100%{transform:scale(1);}
+}
+
+.cta a:hover{
+background:#16a34a;
+}
+
+/* FALLBACK */
+
+.fallback{
+position:fixed;
+inset:0;
+display:none;
+background:#000;
+color:#fff;
+align-items:center;
+justify-content:center;
+text-align:center;
+z-index:20;
+}
+
+</style>
 </head>
 
 <body>
-  <div class="loading" id="loading">
-    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    <div style="font-weight:700;">Carregando…</div>
-  </div>
 
-  <iframe
-    id="appFrame"
-    src="https://receitinha-do-dia.lovable.app/"
-    allow="clipboard-read; clipboard-write; fullscreen"
-    referrerpolicy="no-referrer-when-downgrade"
-  ></iframe>
+<div class="loading" id="loading">
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div style="font-weight:700;">Carregando…</div>
+</div>
 
-  <div class="fallback" id="fallback">
-    <div class="box">
-      <h2 style="margin-bottom:8px;">Abrir página</h2>
-      <p>Se não carregar dentro do site, toque no botão abaixo para abrir direto.</p>
-      <a href="https://receitinha-do-dia.lovable.app/" target="_blank" rel="noopener">ABRIR AGORA</a>
-      <div class="small">Se você estiver rodando anúncios, o ideal é usar domínio próprio depois.</div>
-    </div>
-  </div>
+<iframe
+id="appFrame"
+src="https://receitinha-do-dia.lovable.app/"
+allow="fullscreen">
+</iframe>
 
-  <script>
-    (function () {
-      const frame = document.getElementById("appFrame");
-      const loading = document.getElementById("loading");
-      const fallback = document.getElementById("fallback");
+<!-- BOTÃO DA OFERTA -->
+<div class="cta">
+<a href="https://checkout.perfectpay.com.br/pay/PPU38CQ6FE7" target="_blank">
+🔥 COMPRAR AGORA POR APENAS R$17
+</a>
+</div>
 
-      // some browsers don't reliably fire iframe onload; use both
-      let loaded = false;
+<script>
 
-      function hideLoader() {
-        if (loaded) return;
-        loaded = true;
-        loading.style.display = "none";
-      }
+(function(){
 
-      frame.addEventListener("load", () => {
-        // if it loads, hide loader
-        hideLoader();
-      });
+const frame=document.getElementById("appFrame");
+const loading=document.getElementById("loading");
 
-      // fallback timer: if iframe doesn't load in 6s, show fallback button
-      setTimeout(() => {
-        if (!loaded) {
-          loading.style.display = "none";
-          fallback.style.display = "flex";
-        }
-      }, 6000);
+let loaded=false;
 
-      // extra safety: hide loader after first paint
-      requestAnimationFrame(() => setTimeout(() => {
-        if (!loaded) hideLoader();
-      }, 1200));
-    })();
-  </script>
+function hideLoader(){
+if(loaded)return;
+loaded=true;
+loading.style.display="none";
+}
+
+frame.addEventListener("load",hideLoader);
+
+setTimeout(()=>{
+if(!loaded){
+loading.style.display="none";
+}
+},5000);
+
+})();
+
+</script>
+
 </body>
 </html>
