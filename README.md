@@ -1,3 +1,4 @@
+index.html
 import SiteHeader from "@/components/SiteHeader";
 import HeroSection from "@/components/HeroSection";
 import WeightCalculator from "@/components/WeightCalculator";
